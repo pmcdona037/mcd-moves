@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personal long-distance hiking journal." />
+  <title>Hiking Journal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGATION
+       ====================================================== -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Hiking Journal</a>
+      <ul class="nav-links">
+        <li><a href="index.html">All Trips</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======================================================
+       HOMEPAGE CONTENT
+       ====================================================== -->
+  <main class="page-wrapper">
+
+    <header class="home-hero">
+      <h1>Miles &amp; Mountains</h1>
+      <p>
+        A personal record of long-distance trails — distances walked,
+        heights climbed, and days spent out.
+      </p>
+    </header>
+
+    <section class="trips-section">
+      <h2>All Trips</h2>
+
+      <!--
+        Trip cards are injected here by main.js.
+        To add a new trip, edit /data/trips.json — no code changes needed.
+      -->
+      <div class="trip-grid" id="trip-list">
+        <p class="loading-state">Loading trips…</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer>
+    <span>Personal hiking journal</span>
+  </footer>
+
+  <!-- ======================================================
+       SCRIPTS
+       Load utils.js first (shared helpers), then main.js.
+       ====================================================== -->
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "title": "John Muir Trail — North Section",
+  "description": "Three days through the High Sierra from Tuolumne Meadows, tracing the Lyell Fork and crossing the range crest toward Thousand Island Lake.",
+  "start_date": "2023-08-04",
+  "start_time": "07:30",
+  "end_date": "2023-08-06",
+  "end_time": "15:20",
+  "days": [
+    "day-1.geojson",
+    "day-2.geojson",
+    "day-3.geojson"
+  ]
+}

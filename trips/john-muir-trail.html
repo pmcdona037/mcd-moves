@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="John Muir Trail section hike trip recap." />
+  <title>John Muir Trail — Hiking Journal</title>
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Leaflet CSS (loaded from CDN — no build step required) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  />
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGATION
+       ====================================================== -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html">Hiking Journal</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">All Trips</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======================================================
+       TRIP CONTENT
+       ====================================================== -->
+  <main class="page-wrapper">
+
+    <!-- Header -->
+    <header class="trip-header">
+      <a class="trip-header-back" href="../index.html">← All Trips</a>
+      <h1 id="trip-title">—</h1>
+      <p class="trip-header-subtitle" id="trip-description"></p>
+
+      <!-- Overview stats grid -->
+      <div class="trip-stats-row">
+        <div class="trip-stat-block">
+          <div class="label">Start</div>
+          <div class="value" id="trip-start-date">—</div>
+        </div>
+        <div class="trip-stat-block">
+          <div class="label">Finish</div>
+          <div class="value" id="trip-end-date">—</div>
+        </div>
+        <div class="trip-stat-block">
+          <div class="label">Duration</div>
+          <div class="value" id="trip-elapsed">—</div>
+        </div>
+        <div class="trip-stat-block">
+          <div class="label">Distance</div>
+          <div class="value" id="trip-total-distance">—</div>
+        </div>
+        <div class="trip-stat-block">
+          <div class="label">Elevation gain</div>
+          <div class="value" id="trip-total-elevation">—</div>
+        </div>
+        <div class="trip-stat-block">
+          <div class="label">Days</div>
+          <div class="value" id="trip-days-count">—</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Map -->
+    <section class="map-section">
+      <p class="section-label">Route Map</p>
+      <div id="trip-map"></div>
+      <span id="map-loading" style="display:none"></span>
+    </section>
+
+    <!-- Day color legend (populated by trip.js) -->
+    <div class="day-legend" id="day-legend"></div>
+
+    <!-- Day-by-day breakdown table -->
+    <section class="days-section">
+      <h2>Day by Day</h2>
+      <table class="days-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Distance</th>
+            <th>Elevation gain</th>
+          </tr>
+        </thead>
+        <tbody id="days-tbody">
+          <!-- Rows injected by trip.js -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer>
+    <span>Personal hiking journal</span>
+  </footer>
+
+  <!-- ======================================================
+       SCRIPTS
+       Change window.TRIP_ID to match your /data/ folder name.
+       ====================================================== -->
+  <script>
+    window.TRIP_ID = 'john-muir-trail';
+  </script>
+
+  <!-- Leaflet JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- Shared utilities — must load before trip.js -->
+  <script src="../js/utils.js"></script>
+  <script src="../js/trip.js"></script>
+
+</body>
+</html>
