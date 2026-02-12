@@ -17,4 +17,13 @@
     "days": 3,
     "page_url": "trips/john-muir-trail.html"
   }
+  {
+  "title": "Colorado Trail",
+  "start_date": "2024-09-22",
+  "end_date": "2024-09-27",
+  "total_distance_miles": 87.4,
+  "total_elevation_gain_ft": 18200,
+  "days": 10,
+  "page_url": "trips/colorado-trail.html"
+}
 ]
