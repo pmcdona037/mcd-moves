@@ -741,12 +741,6 @@ footer {
   table-layout: fixed;
 }
 
-/* Column widths — applied via colgroup in gear.js */
-.gear-col-gear      { width: 50%; }
-.gear-col-type      { width: 25%; }
-.gear-col-qty       { width: 8%;  }
-.gear-col-weight    { width: 17%; }
-
 .gear-items-table thead tr {
   border-bottom: 1px solid var(--border);
 }
