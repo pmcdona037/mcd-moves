@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "day": 4,
+        "name": "Day 4"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+        
+        ]
+      }
+    }
+  ]
+}
