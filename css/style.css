@@ -643,3 +643,161 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* ============================================================
+   GEAR LIST SECTION
+   ============================================================ */
+
+#gear-section {
+  display: none;
+  margin-bottom: 5rem;
+}
+
+#gear-section h2 {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+}
+
+/* Small muted subtitle above the summary table */
+.gear-sheet-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  font-style: normal;
+}
+
+/* --- Summary table ----------------------------------------
+   Width is auto so it only takes as much space as it needs.
+   Both columns left-aligned.
+   Total rows are bold + white with a top border separator.
+   ---------------------------------------------------------- */
+.gear-summary-table {
+  width: auto;
+  min-width: 300px;
+  border-collapse: collapse;
+  margin-bottom: 3rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+}
+
+.gear-summary-table th,
+.gear-summary-table td {
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.gear-summary-table th:last-child,
+.gear-summary-table td:last-child {
+  padding-right: 0.75rem;
+  min-width: 100px;
+}
+
+/* Header row */
+.gear-summary-header th {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+  background: var(--surface);
+}
+
+/* Total rows — bold, bright, separated */
+.gear-summary-total td {
+  font-weight: 600;
+  color: var(--white);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.gear-summary-total:last-child td {
+  border-bottom: none;
+}
+
+/* --- Category sections ------------------------------------ */
+.gear-category {
+  margin-bottom: 2.75rem;
+}
+
+.gear-category-name {
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+/* Fixed layout ensures identical column widths across all sections */
+.gear-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  table-layout: fixed;
+}
+
+/* Column widths — applied via colgroup in gear.js */
+.gear-col-gear      { width: 38%; }
+.gear-col-type      { width: 30%; }
+.gear-col-qty       { width: 10%; }
+.gear-col-weight    { width: 22%; }
+
+.gear-items-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.gear-items-table th {
+  text-align: left;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+  padding: 0 1.5rem 0.6rem 0;
+}
+
+.gear-items-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.gear-items-table td {
+  padding: 0.65rem 1.5rem 0.65rem 0;
+  color: var(--text);
+  vertical-align: top;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Weight column — muted, no ellipsis needed */
+.gear-items-table td:last-child,
+.gear-items-table th:last-child {
+  padding-right: 0;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.gear-subtotal td {
+  font-weight: 500;
+  color: var(--accent);
+  border-bottom: none;
+  padding-top: 0.75rem;
+}
+
+/* --- Responsive ------------------------------------------- */
+@media (max-width: 680px) {
+  .gear-items-table {
+    font-size: 0.82rem;
+  }
+
+  /* Hide "Item Type" column on small screens to save space */
+  .gear-items-table th:nth-child(2),
+  .gear-items-table td:nth-child(2) {
+    display: none;
+  }
+}
