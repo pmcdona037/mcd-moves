@@ -594,7 +594,7 @@ footer {
 
 /* --- Prose blocks ----------------------------------------- */
 .journal-entry {
-  max-width: 680px;
+  max-width: 100%;
 }
 
 .journal-entry p {
