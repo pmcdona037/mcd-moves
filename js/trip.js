@@ -75,7 +75,10 @@ async function initTripPage(tripId, dataRoot) {
 
   setTextContent('trip-total-distance',  `${Math.round(totalDistance * 10) / 10} mi`);
   setTextContent('trip-total-elevation', `${formatNumber(Math.round(totalElevation / 10) * 10)} ft`);
-  setTextContent('trip-days-count',      `${validDays.length}`);
+  const vertPerMile = totalDistance > 0
+  ? `${formatNumber(Math.round(totalElevation / totalDistance))} ft/mi`
+  : '—';
+setTextContent('trip-vert-per-mile', vertPerMile);
 
   // Render day table
   buildDayTable(dayResults);
