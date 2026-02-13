@@ -123,6 +123,12 @@ function buildCategorySection(cat) {
     <div class="gear-category">
       <h3 class="gear-category-name">${esc(cat.name)}</h3>
       <table class="gear-items-table">
+        <colgroup>
+          <col style="width:50%">
+          <col style="width:25%">
+          <col style="width:8%">
+          <col style="width:17%">
+        </colgroup>
         <thead>
           <tr>
             <th>Gear</th>
