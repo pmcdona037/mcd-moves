@@ -1,10 +1,10 @@
 {
-  "title": "Presidential Traverse",
-  "description": "A 3-day traverse of the Northern Presidential Range in New Hampshire, including summits of Washington, Jefferson, Adams, and Madison.",
-  "start_date": "2024-07-12",
-  "start_time": "06:15",
-  "end_date": "2024-07-14",
-  "end_time": "16:45",
+  "title": "Appalachian Trail - September 2025",
+  "description": "A 9-day traverse of the Appalachian Trail in New Hampshire, Vermont, and Massachusetts.",
+  "start_date": "2025-09-05",
+  "start_time": "22:30",
+  "end_date": "2025-09-14",
+  "end_time": "09:13",
   "days": [
     "day-1.geojson",
     "day-2.geojson",
