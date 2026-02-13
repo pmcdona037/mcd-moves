@@ -1,0 +1,13 @@
+{
+  "title": "Appalachian Trail — April 2025",
+  "description": "Three days through the Appalachian Mountains in Virginia and West Virginia from Shenandoah National Park to Harpers Ferry, West Virginia.",
+  "start_date": "2025-04-05",
+  "start_time": "11:40",
+  "end_date": "2025-04-11",
+  "end_time": "16:10",
+  "days": [
+    "day-1.geojson",
+    "day-2.geojson",
+    "day-3.geojson"
+  ]
+}
