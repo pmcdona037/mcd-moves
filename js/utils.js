@@ -104,9 +104,10 @@ function calcElapsedTime(startDate, startTime, endDate, endTime) {
 }
 
 /**
- * Format a date string (YYYY-MM-DD) to a human-readable form.
+ * Format a date string (YYYY-MM-DD) to abbreviated form.
+ * Used on trip pages: "Apr 5, 2025"
  * @param {string} dateStr
- * @returns {string} e.g. "June 1, 2024"
+ * @returns {string}
  */
 function formatDate(dateStr) {
   if (!dateStr) return '—';
@@ -114,6 +115,24 @@ function formatDate(dateStr) {
     const [y, m, d] = dateStr.split('-').map(Number);
     return new Date(y, m - 1, d).toLocaleDateString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric'
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
+/**
+ * Format a date string (YYYY-MM-DD) to full long form.
+ * Used on the homepage: "April 5, 2025"
+ * @param {string} dateStr
+ * @returns {string}
+ */
+function formatDateLong(dateStr) {
+  if (!dateStr) return '—';
+  try {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
     });
   } catch {
     return dateStr;
