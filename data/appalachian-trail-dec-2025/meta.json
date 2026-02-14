@@ -1,0 +1,13 @@
+{
+  "title": "Appalachian Trail - Unicoi Gap to GA/NC Border Yo-Yo",
+  "description": "A 3-day out and back on the Appalachian Trail to finish the Georgia section of the AT.",
+  "start_date": "2025-12-30",
+  "start_time": "16:09",
+  "end_date": "2026-01-01",
+  "end_time": "11:28",
+  "days": [
+    "day-1.geojson",
+    "day-2.geojson",
+    "day-3.geojson"
+  ]
+}
