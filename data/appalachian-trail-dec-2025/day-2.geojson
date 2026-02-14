@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "day": 1,
+        "day": 2,
         "name": "Optional day description"
       },
       "geometry": {
