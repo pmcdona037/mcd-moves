@@ -14,4 +14,7 @@
     "day-6.geojson",
     "day-7.geojson"
   ]
+  "has_journal": true,
+  "has_photos": true,
+  "has_gear": true
 }
