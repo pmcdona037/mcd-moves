@@ -788,6 +788,7 @@ footer {
 @media (max-width: 680px) {
   .gear-items-table {
     font-size: 0.82rem;
+    table-layout: auto; /* Override fixed layout so remaining columns fill width naturally */
   }
 
   /* Hide "Item Type" and "Qty" columns on small screens */
@@ -797,8 +798,4 @@ footer {
   .gear-items-table td:nth-child(3) {
     display: none;
   }
-
-  /* Rebalance remaining columns: Gear 75% / Weight 25% */
-  .gear-items-table col:nth-child(1) { width: 75%; }
-  .gear-items-table col:nth-child(4) { width: 25%; }
 }
