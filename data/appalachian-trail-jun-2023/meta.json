@@ -1,0 +1,12 @@
+{
+  "title": "Appalachian Trail - Springer Mountain to Unicoi Gap",
+  "description": "A 2-day failed section hike on the Appalachian Trail in Georgia due to a bad experience with a person.",
+  "start_date": "2023-06-12",
+  "start_time": "09:40",
+  "end_date": "2023-06-13",
+  "end_time": "18:52",
+  "days": [
+    "day-1.geojson",
+    "day-2.geojson"
+  ]
+}
