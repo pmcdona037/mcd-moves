@@ -217,6 +217,24 @@ nav {
   transform: translateX(4px);
 }
 
+/* --- Trip tags -------------------------------------------- */
+.trip-tags {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.trip-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
 /* --- Loading / Error States ------------------------------- */
 .loading-state,
 .error-state {
