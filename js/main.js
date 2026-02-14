@@ -73,6 +73,9 @@ async function computeTripData(entry) {
     totalDistance: null,
     totalElevation: null,
     duration: null,
+    has_journal: false,
+    has_photos: false,
+    has_gear: false,
     error: null,
   };
 
@@ -93,6 +96,9 @@ async function computeTripData(entry) {
   result.start_time  = meta.start_time  || null;
   result.end_date    = meta.end_date    || null;
   result.end_time    = meta.end_time    || null;
+  result.has_journal = meta.has_journal || false;
+  result.has_photos  = meta.has_photos  || false;
+  result.has_gear    = meta.has_gear    || false;
 
   // Duration formatted as "5d 4h 3m"
   if (meta.start_date && meta.end_date) {
@@ -205,6 +211,17 @@ function buildTripCard(trip) {
   const elevation = trip.totalElevation != null ? `${formatNumber(trip.totalElevation)} ft` : '—';
   const duration  = trip.duration || '—';
 
+  // Build tags from meta flags
+  const tagDefs = [
+    { key: 'has_journal', label: 'Journal' },
+    { key: 'has_photos',  label: 'Photos'  },
+    { key: 'has_gear',    label: 'Gear'    },
+  ];
+  const tags = tagDefs
+    .filter(t => trip[t.key])
+    .map(t => `<span class="trip-tag">${t.label}</span>`)
+    .join('');
+
   return `
     <a class="trip-card" href="${trip.page_url || '#'}">
       <div class="trip-card-info">
@@ -224,6 +241,7 @@ function buildTripCard(trip) {
             <span class="trip-stat-label">Duration</span>
           </div>
         </div>
+        ${tags ? `<div class="trip-tags">${tags}</div>` : ''}
       </div>
       <div class="trip-card-arrow">→</div>
     </a>
