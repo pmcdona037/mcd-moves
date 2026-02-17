@@ -5,7 +5,9 @@
       "type": "Feature",
       "properties": {
         "day": 5,
-        "name": "Day 5"
+        "name": "",
+        "distance_miles": 29.2,
+        "elevation_gain_ft": 5230
       },
       "geometry": {
         "type": "LineString",
