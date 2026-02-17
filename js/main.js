@@ -141,8 +141,8 @@ async function computeTripData(entry) {
     }
   }
 
-  result.totalDistance  = Math.round(totalDistance  * 10) / 10;
-  result.totalElevation = Math.round(totalElevation / 10) * 10;
+  result.totalDistance  = parseFloat(totalDistance.toFixed(1));
+  result.totalElevation = Math.round(totalElevation);
 
   return result;
 }
@@ -220,7 +220,7 @@ function buildSkeletonCard(pageUrl) {
 
 function buildTripCard(trip) {
   const dateRange = buildDateRange(trip.start_date, trip.end_date);
-  const distance  = trip.totalDistance  != null ? `${trip.totalDistance} mi`               : '—';
+  const distance  = trip.totalDistance  != null ? `${trip.totalDistance.toFixed(1)} mi`      : '—';
   const elevation = trip.totalElevation != null ? `${formatNumber(trip.totalElevation)} ft` : '—';
   const duration  = trip.duration || '—';
 
