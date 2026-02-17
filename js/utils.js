@@ -38,7 +38,7 @@ function calcDistance(coords) {
   for (let i = 1; i < coords.length; i++) {
     total += haversineDistance(coords[i - 1], coords[i]);
   }
-  return Math.round(total * 10) / 10;
+  return parseFloat(total.toFixed(1));
 }
 
 /**
@@ -58,8 +58,8 @@ function calcElevationGain(coords) {
       if (diff > 0) gain += diff;
     }
   }
-  // Convert meters to feet, round to nearest 10
-  return Math.round((gain * 3.28084) / 10) * 10;
+  // Convert meters to feet, round to whole number
+  return Math.round(gain * 3.28084);
 }
 
 /**
@@ -96,8 +96,8 @@ function calcElapsedTime(startDate, startTime, endDate, endTime) {
     const parts = [];
     if (days)    parts.push(`${days}d`);
     if (hours)   parts.push(`${hours}h`);
-    if (minutes) parts.push(`${minutes}m`);
-    return parts.join(' ') || '< 1m';
+    parts.push(`${minutes}m`);
+    return parts.join(' ') || '0m';
   } catch {
     return '—';
   }
