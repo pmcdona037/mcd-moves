@@ -144,16 +144,16 @@ function formatDateLong(dateStr) {
  * Add more colors here if a trip has more than 8 days.
  */
 const DAY_COLORS_NEUTRAL = [
-  '#6a85a0',  // steel blue
-  '#7a9e78',  // sage green
-  '#a09060',  // khaki
-  '#9e7878',  // dusty rose
-  '#6a9e9e',  // slate teal
-  '#8878a0',  // muted lavender
-  '#a07860',  // terracotta
-  '#6878a0',  // periwinkle
-  '#a09878',  // warm sand
-  '#6a9080',  // eucalyptus
+  '#7a95b0',  // steel blue (brighter)
+  '#8aae88',  // sage green (brighter)
+  '#b0a070',  // khaki (brighter)
+  '#ae8888',  // dusty rose (brighter)
+  '#7aaeae',  // slate teal (brighter)
+  '#9888b0',  // muted lavender (brighter)
+  '#b08870',  // terracotta (brighter)
+  '#7888b0',  // periwinkle (brighter)
+  '#b0a888',  // warm sand (brighter)
+  '#7aa090',  // eucalyptus (brighter)
 ];
 
 /**
