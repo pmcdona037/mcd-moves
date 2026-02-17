@@ -94,17 +94,35 @@ async function initTripPage(tripId, dataRoot) {
 
 /* ---- Load all GeoJSON day files concurrently ---------------- */
 async function loadAllDays(tripId, dataRoot, dayFiles) {
-  const promises = dayFiles.map((filename, index) =>
-    loadDayGeoJSON(tripId, dataRoot, filename, index)
+  const promises = dayFiles.map((entry, index) =>
+    loadDayGeoJSON(tripId, dataRoot, entry, index)
   );
   return Promise.all(promises);
 }
 
 /**
  * Fetch a single day GeoJSON file and extract stats.
- * Returns a result object whether or not the fetch succeeded.
+ *
+ * Supports two meta.json formats:
+ *
+ * LEGACY (string) — stats computed from GeoJSON coordinates,
+ * or from embedded GeoJSON properties if present:
+ *   "days": ["day-1.geojson", "day-2.geojson"]
+ *
+ * NEW (object) — stats taken directly from meta.json,
+ * GeoJSON still loaded for the map:
+ *   "days": [
+ *     { "file": "day-1.geojson", "distance_miles": 14.2, "elevation_gain_ft": 3800 },
+ *     { "file": "day-2.geojson", "distance_miles": 11.7, "elevation_gain_ft": 2100 }
+ *   ]
  */
-async function loadDayGeoJSON(tripId, dataRoot, filename, index) {
+async function loadDayGeoJSON(tripId, dataRoot, entry, index) {
+  // Normalise entry — handle both string and object formats
+  const isNewFormat = typeof entry === 'object' && entry !== null;
+  const filename    = isNewFormat ? entry.file : entry;
+  const manualDist  = isNewFormat ? entry.distance_miles    : null;
+  const manualElev  = isNewFormat ? entry.elevation_gain_ft : null;
+
   const url = `${dataRoot}/${tripId}/${filename}`;
   const result = {
     index,
@@ -125,20 +143,24 @@ async function loadDayGeoJSON(tripId, dataRoot, filename, index) {
     result.geojson = geojson;
     result.ok = true;
 
-    // Extract coords from the first LineString feature
-    const coords = extractCoords(geojson);
-
-    // Use embedded properties if present; otherwise compute from coordinates
     const props = getFirstFeatureProps(geojson);
     result.dayNumber = (props && props.day != null) ? props.day : index + 1;
 
-    result.distance = (props && props.distance_miles != null)
-      ? props.distance_miles
-      : calcDistance(coords);
-
-    result.elevation = (props && props.elevation_gain_ft != null)
-      ? props.elevation_gain_ft
-      : calcElevationGain(coords);
+    if (isNewFormat) {
+      // New format — use manual numbers from meta.json directly
+      result.distance  = manualDist != null ? manualDist : 0;
+      result.elevation = manualElev != null ? manualElev : 0;
+    } else {
+      // Legacy format — use embedded GeoJSON properties if present,
+      // otherwise compute from coordinates
+      const coords = extractCoords(geojson);
+      result.distance = (props && props.distance_miles != null)
+        ? props.distance_miles
+        : calcDistance(coords);
+      result.elevation = (props && props.elevation_gain_ft != null)
+        ? props.elevation_gain_ft
+        : calcElevationGain(coords);
+    }
 
   } catch (err) {
     result.error = err.message;
