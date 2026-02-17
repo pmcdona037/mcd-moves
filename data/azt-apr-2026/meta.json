@@ -1,0 +1,16 @@
+{
+  "title": "Trip Name",
+  "description": "One sentence shown below the title on the trip page.",
+  "start_date": "2026-04-20",
+  "start_time": "09:00",
+  "end_date": "2026-04-25",
+  "end_time": "17:30",
+  "days": [
+  { "file": "day-1.geojson", "distance_miles": 26.7, "elevation_gain_ft": 4282 },
+  { "file": "day-2.geojson", "distance_miles": 29.1, "elevation_gain_ft": 6424 },
+  { "file": "day-3.geojson", "distance_miles": 28.5, "elevation_gain_ft": 4908 },
+  { "file": "day-4.geojson", "distance_miles": 30.4, "elevation_gain_ft": 4605 },
+  { "file": "day-5.geojson", "distance_miles": 29.4, "elevation_gain_ft": 7654 },
+  { "file": "day-6.geojson", "distance_miles": 14.0, "elevation_gain_ft": 903 },
+]
+}
