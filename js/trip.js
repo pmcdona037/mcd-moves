@@ -73,8 +73,8 @@ async function initTripPage(tripId, dataRoot) {
     totalElevation += day.elevation;
   }
 
-  setTextContent('trip-total-distance',  `${Math.round(totalDistance * 10) / 10} mi`);
-  setTextContent('trip-total-elevation', `${formatNumber(Math.round(totalElevation / 10) * 10)} ft`);
+  setTextContent('trip-total-distance',  `${(totalDistance).toFixed(1)} mi`);
+  setTextContent('trip-total-elevation', `${formatNumber(Math.round(totalElevation))} ft`);
 
   // Vert per mile = total elevation gain (ft) / total distance (miles)
   const vertPerMile = totalDistance > 0
@@ -330,7 +330,7 @@ function buildTooltipHtml(day) {
     <div class="tooltip-day">Day ${day.dayNumber}</div>
     <div class="tooltip-stats">
       <div class="tooltip-stat">
-        <span class="tooltip-stat-val">${day.distance} mi</span>
+        <span class="tooltip-stat-val">${day.distance.toFixed(1)} mi</span>
         <span class="tooltip-stat-lbl">Distance</span>
       </div>
       <div class="tooltip-stat">
@@ -357,7 +357,7 @@ function buildDayTable(dayResults) {
           <span class="day-color-dot" style="background:${dayColorNeutral(day.index)}"></span>
           Day ${day.dayNumber}
         </td>
-        <td>${day.distance} mi</td>
+        <td>${day.distance.toFixed(1)} mi</td>
         <td>+${formatNumber(day.elevation)} ft</td>
       `;
     } else {
