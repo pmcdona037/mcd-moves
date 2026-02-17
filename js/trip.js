@@ -252,7 +252,7 @@ function buildMap(dayResults) {
       style: {
         color: colorNeutral,
         weight: 2.5,
-        opacity: 0.85,
+        opacity: 0.95,
         lineCap: 'round',
         lineJoin: 'round',
       },
@@ -267,7 +267,7 @@ function buildMap(dayResults) {
           }).openTooltip(e.latlng);
         });
         featureLayer.on('mouseout', (e) => {
-          e.target.setStyle({ color: colorNeutral, weight: 2.5, opacity: 0.85 });
+          e.target.setStyle({ color: colorNeutral, weight: 2.5, opacity: 0.95 });
           featureLayer.closeTooltip();
         });
         featureLayer.on('mousemove', (e) => {
