@@ -73,6 +73,9 @@ async function computeTripData(entry) {
     totalDistance: null,
     totalElevation: null,
     duration: null,
+    has_journal: false,
+    has_photos: false,
+    has_gear: false,
     error: null,
   };
 
@@ -93,6 +96,9 @@ async function computeTripData(entry) {
   result.start_time  = meta.start_time  || null;
   result.end_date    = meta.end_date    || null;
   result.end_time    = meta.end_time    || null;
+  result.has_journal = meta.has_journal || false;
+  result.has_photos  = meta.has_photos  || false;
+  result.has_gear    = meta.has_gear    || false;
 
   // Duration formatted as "5d 4h 3m"
   if (meta.start_date && meta.end_date) {
@@ -102,23 +108,36 @@ async function computeTripData(entry) {
     );
   }
 
-  // 2. Fetch all day GeoJSON files and compute totals
+  // 2. Compute totals from day entries
   const dayFiles = Array.isArray(meta.days) ? meta.days : [];
   if (dayFiles.length === 0) return result;
 
-  const dayResults = await Promise.all(
-    dayFiles.map(filename =>
-      fetchDayStats(`${dataRoot}/${trip_id}/${filename}`)
-    )
-  );
+  // Detect format from first entry
+  const firstEntry  = dayFiles[0];
+  const isNewFormat = typeof firstEntry === 'object' && firstEntry !== null;
 
   let totalDistance  = 0;
   let totalElevation = 0;
 
-  for (const day of dayResults) {
-    if (day.ok) {
-      totalDistance  += day.distance;
-      totalElevation += day.elevation;
+  if (isNewFormat) {
+    // New format — sum manual stats directly from meta.json, no GeoJSON fetch needed
+    for (const entry of dayFiles) {
+      totalDistance  += entry.distance_miles    || 0;
+      totalElevation += entry.elevation_gain_ft || 0;
+    }
+  } else {
+    // Legacy format — fetch each GeoJSON and compute from coordinates
+    // (or from embedded GeoJSON properties if present)
+    const dayResults = await Promise.all(
+      dayFiles.map(filename =>
+        fetchDayStats(`${dataRoot}/${trip_id}/${filename}`)
+      )
+    );
+    for (const day of dayResults) {
+      if (day.ok) {
+        totalDistance  += day.distance;
+        totalElevation += day.elevation;
+      }
     }
   }
 
@@ -205,6 +224,17 @@ function buildTripCard(trip) {
   const elevation = trip.totalElevation != null ? `${formatNumber(trip.totalElevation)} ft` : '—';
   const duration  = trip.duration || '—';
 
+  // Build tags from meta flags
+  const tagDefs = [
+    { key: 'has_journal', label: 'Journal' },
+    { key: 'has_photos',  label: 'Photos'  },
+    { key: 'has_gear',    label: 'Gear'    },
+  ];
+  const tags = tagDefs
+    .filter(t => trip[t.key])
+    .map(t => `<span class="trip-tag">${t.label}</span>`)
+    .join('');
+
   return `
     <a class="trip-card" href="${trip.page_url || '#'}">
       <div class="trip-card-info">
@@ -224,6 +254,7 @@ function buildTripCard(trip) {
             <span class="trip-stat-label">Duration</span>
           </div>
         </div>
+        ${tags ? `<div class="trip-tags">${tags}</div>` : ''}
       </div>
       <div class="trip-card-arrow">→</div>
     </a>
