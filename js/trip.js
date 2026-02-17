@@ -75,10 +75,12 @@ async function initTripPage(tripId, dataRoot) {
 
   setTextContent('trip-total-distance',  `${Math.round(totalDistance * 10) / 10} mi`);
   setTextContent('trip-total-elevation', `${formatNumber(Math.round(totalElevation / 10) * 10)} ft`);
+
+  // Vert per mile = total elevation gain (ft) / total distance (miles)
   const vertPerMile = totalDistance > 0
-  ? `${formatNumber(Math.round(totalElevation / totalDistance))} ft/mi`
-  : '—';
-setTextContent('trip-vert-per-mile', vertPerMile);
+    ? `${formatNumber(Math.round(totalElevation / totalDistance))} ft/mi`
+    : '—';
+  setTextContent('trip-vert-per-mile', vertPerMile);
 
   // Render day table
   buildDayTable(dayResults);
@@ -185,27 +187,42 @@ function buildMap(dayResults) {
   const mapEl = document.getElementById('trip-map');
   if (!mapEl) return;
 
-  // Use ESRI World Imagery (satellite) — free, no API key required
   const map = L.map('trip-map', {
     zoomControl: true,
     scrollWheelZoom: true,
     attributionControl: true,
   });
 
+  // Base layer — ESRI satellite imagery
   L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     {
-      attribution: 'Tiles © Esri — Source: Esri, DigitalGlobe, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community',
+      attribution: 'Tiles © Esri',
       maxZoom: 18,
     }
   ).addTo(map);
 
+  // Boundary overlay — ESRI Reference layer (state + country borders, labels)
+  // Transparent overlay drawn on top of satellite — no API key required
+  L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+    {
+      opacity: 0.5,
+      maxZoom: 18,
+      pane: 'overlayPane',
+    }
+  ).addTo(map);
+
   const allBounds = [];
-  const layers = [];
+  const layers    = [];
 
-  for (const day of dayResults) {
-    if (!day.ok || !day.geojson) continue;
+  // Track first coord of day 1 and last coord of final day for start/end markers
+  let startCoord = null;
+  let endCoord   = null;
 
+  const validDays = dayResults.filter(d => d.ok && d.geojson);
+
+  for (const day of validDays) {
     const colorNeutral = dayColorNeutral(day.index);
     const colorHover   = dayColorHover(day.index);
 
@@ -218,33 +235,37 @@ function buildMap(dayResults) {
         lineJoin: 'round',
       },
       onEachFeature: (_feature, featureLayer) => {
-        // Hover interactions
         featureLayer.on('mouseover', (e) => {
           e.target.setStyle({ color: colorHover, weight: 4, opacity: 1 });
-
-          const tooltipHtml = buildTooltipHtml(day);
-          featureLayer.bindTooltip(tooltipHtml, {
+          featureLayer.bindTooltip(buildTooltipHtml(day), {
             sticky: true,
             direction: 'top',
             offset: [0, -6],
             className: 'hike-tooltip',
           }).openTooltip(e.latlng);
         });
-
         featureLayer.on('mouseout', (e) => {
           e.target.setStyle({ color: colorNeutral, weight: 2.5, opacity: 0.85 });
           featureLayer.closeTooltip();
         });
-
         featureLayer.on('mousemove', (e) => {
-          if (featureLayer.isTooltipOpen()) {
-            featureLayer.getTooltip().setLatLng(e.latlng);
-          }
+          if (featureLayer.isTooltipOpen()) featureLayer.getTooltip().setLatLng(e.latlng);
         });
       }
     }).addTo(map);
 
     layers.push(layer);
+
+    // Capture start and end coordinates across all days
+    const coords = extractCoords(day.geojson);
+    if (coords.length) {
+      if (startCoord === null) {
+        // First valid coordinate of the entire trip
+        startCoord = [coords[0][1], coords[0][0]]; // [lat, lon] for Leaflet
+      }
+      // Always update endCoord — will end up as last coord of last day
+      endCoord = [coords[coords.length - 1][1], coords[coords.length - 1][0]];
+    }
 
     try {
       const bounds = layer.getBounds();
@@ -255,19 +276,31 @@ function buildMap(dayResults) {
   // Fit map to full route
   if (allBounds.length > 0) {
     let combined = allBounds[0];
-    for (let i = 1; i < allBounds.length; i++) {
-      combined = combined.extend(allBounds[i]);
-    }
+    for (let i = 1; i < allBounds.length; i++) combined = combined.extend(allBounds[i]);
     map.fitBounds(combined, { padding: [32, 32] });
   } else {
-    // Fallback view if no valid bounds
     map.setView([39.5, -98.35], 4);
     showMapError('Could not determine route bounds.');
   }
 
+  // Add pulsing start and end markers
+  if (startCoord) addPulseMarker(map, startCoord, 'start');
+  if (endCoord)   addPulseMarker(map, endCoord,   'end');
+
   // Hide loading placeholder
   const loadingEl = document.getElementById('map-loading');
   if (loadingEl) loadingEl.remove();
+}
+
+/* ---- Pulsing marker --------------------------------------- */
+function addPulseMarker(map, latlng, type) {
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="pulse-marker pulse-marker--${type}"><div class="pulse-ring"></div></div>`,
+    iconSize:   [16, 16],
+    iconAnchor: [8, 8],
+  });
+  L.marker(latlng, { icon, interactive: false }).addTo(map);
 }
 
 function buildTooltipHtml(day) {
