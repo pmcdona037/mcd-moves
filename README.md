@@ -118,7 +118,7 @@ Each file represents one day's route. Coordinates are `[longitude, latitude, ele
 ```
 
 **Getting GPS data into GeoJSON:**
-1. Export your route from Caltopo as **GPX** with "Add SRTM elevation to track points" checked or add elevation at (https://www.gpsvisualizer.com/convert_input?form:add_elevation=auto&convert_delimiter=comma&units=metric)
+1. Export your route from Caltopo as **GPX** with "Add SRTM elevation to track points" checked
 2. Convert GPX to GeoJSON at [gpx.studio](https://gpx.studio) or [mygeodata.cloud/converter](https://mygeodata.cloud/converter/)
 3. Split into one file per day at each campsite
 
@@ -218,14 +218,41 @@ Edit the HTML directly to add your narrative and photos.
 </figure>
 ```
 
-**To add a photo:**
+### Hosting Photos — Two Options
+
+**Option 1: Flickr (Recommended) — Avoids GitHub storage limits**
+
+1. Upload your photo to Flickr
+2. Go to the photo page and click the **download arrow** (bottom right) or **"View all sizes"**
+3. Select "Large" or "Medium" size
+4. Right-click the displayed image and select "Copy Image Address"
+5. The URL will look like: `https://live.staticflickr.com/65535/[photo-id]_[secret]_b.jpg`
+6. Use that direct URL in your HTML:
+
+```html
+<figure class="journal-photo">
+  <img src="https://live.staticflickr.com/65535/55103810265_521182b04b_b.jpg" alt="Summit view" />
+  <figcaption>Looking north from the summit.</figcaption>
+</figure>
+```
+
+**Flickr size suffixes:**
+- `_b.jpg` = 1024px (recommended — good quality, works reliably)
+- `_h.jpg` = 1600px (if available on your account)
+- `_c.jpg` = 800px (smaller, faster loading)
+
+If large sizes aren't working, check **Flickr Settings → Privacy & Permissions → "Who can download your stuff"** and set it to "Anyone."
+
+**Other external hosting options:** Imgur (free, simple), Cloudflare R2 (10GB free), AWS S3 (cheap, reliable)
+
+**Option 2: GitHub repo — Simple but hits storage limits**
+
 1. Rename the file to lowercase with hyphens (e.g. `day-3-summit.jpg`)
 2. In GitHub: go to `photos/my-new-trip/` → Add file → Upload files
 3. Update the `src` path in the HTML to match the filename
 4. Commit — the photo appears on the live site within ~60 seconds
 
-**Photo tip:** Resize to ~2000px wide before uploading to keep the repo lean.
-GitHub has a 100MB per-file limit and a 1GB total repo limit.
+**GitHub limits:** 100MB per file, 1GB total repo size. Resize to ~2000px wide before uploading.
 
 ---
 
