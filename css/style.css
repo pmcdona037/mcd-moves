@@ -249,9 +249,9 @@ nav {
 
 /* --- Trip Page Header ------------------------------------- */
 .trip-header {
-  padding: 4rem 0 3rem;
+  padding: 3rem 0 2rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .trip-header-back {
@@ -262,7 +262,7 @@ nav {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   transition: color 0.2s;
 }
 
@@ -283,7 +283,7 @@ nav {
   font-size: 0.9rem;
   color: var(--text-muted);
   letter-spacing: 0.04em;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 /* --- Trip Overview Stats ---------------------------------- */
@@ -327,7 +327,7 @@ nav {
 
 /* --- Map Section ------------------------------------------ */
 .map-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .section-label {
@@ -384,7 +384,7 @@ nav {
 
 /* --- Days Table ------------------------------------------- */
 .days-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .days-section h2 {
@@ -597,7 +597,7 @@ footer {
    ============================================================ */
 
 .journal-section {
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
 }
 
 .journal-section h2 {
@@ -605,7 +605,7 @@ footer {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   padding-top: 0.5rem;
 }
 
@@ -667,7 +667,7 @@ footer {
 
 #gear-section {
   display: none;
-  margin-bottom: 5rem;
+  margin-bottom: 3.5rem;
 }
 
 #gear-section h2 {
@@ -675,7 +675,7 @@ footer {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 /* Small muted subtitle above the summary table */
