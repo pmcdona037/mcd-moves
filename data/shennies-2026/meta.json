@@ -1,0 +1,13 @@
+{
+  "title": "Appalachian Trail - Chester Gap to Thornton Gap Yo-Yo",
+  "description": "A 3-day out and back on the Appalachian Trail in Shenandoah National Park.",
+  "start_date": "2026-02-27",
+  "start_time": "16:44",
+  "end_date": "2026-03-01",
+  "end_time": "09:33",
+  "days": [
+    "day-1.geojson",
+    "day-2.geojson",
+    "day-3.geojson"
+  ]
+}
