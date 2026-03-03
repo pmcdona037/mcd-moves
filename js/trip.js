@@ -229,7 +229,7 @@ function buildMap(dayResults) {
   L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png',
     {
-      opacity: 0.7,
+      opacity: 0.4,
       maxZoom: 18,
       pane: 'overlayPane',
     }
@@ -243,7 +243,7 @@ function buildMap(dayResults) {
         style: {
           color: '#ffffff',
           weight: 1.5,
-          opacity: 0.7,
+          opacity: 0.4,
           fill: false,
         },
         interactive: false,
