@@ -243,7 +243,7 @@ function buildMap(dayResults) {
         style: {
           color: '#ffffff',
           weight: 1.5,
-          opacity: 0.2,
+          opacity: 0.1,
           fill: false,
         },
         interactive: false,
@@ -263,7 +263,7 @@ function buildMap(dayResults) {
         style: {
           color: '#ffffff',
           weight: 1.5,
-          opacity: 0.2,
+          opacity: 0.1,
           fill: false,
         },
         interactive: false,
